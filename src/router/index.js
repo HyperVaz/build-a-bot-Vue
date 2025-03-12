@@ -1,6 +1,6 @@
 import {
   createRouter,
-  createWebHashHistory,
+  createWebHistory,
 } from 'vue-router';
 
 import HomePage from '../home/HomePage.vue';
@@ -15,7 +15,7 @@ import SidebarStandart from "@/sidebars/SidebarStandart.vue";
 import SidebarBuild from "@/sidebars/SidebarBuild.vue";
 
 export default createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [{
     path: '/',
     name: 'Home',
@@ -62,6 +62,10 @@ export default createRouter({
       path: '/parts/:partType/:id',
       name: 'Parts',
       component: PartInfo,
-      props: true
+      props: true,
+      beforeEnter(to, from, next) {
+        const isValid = Number.isInteger(Number(to.params.id));
+        next(isValid);
+      },
     }],
 });

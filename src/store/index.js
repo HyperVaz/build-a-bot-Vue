@@ -1,29 +1,19 @@
 import {createStore} from "vuex";
-import axios from "axios";
+
+import robotsModule from './modules/robots';
+import usersModule from './modules/users'
 
 export default createStore({
-  state: {
-    cart: [],
-    parts: null
+  state:{
+    foo: 'root-foo',
   },
-  mutations: {
-    addRobotToCart(state, robot) {
-      state.cart.push(robot);
-    },
-    updateParts(state, parts){
-      state.parts = parts;
-    }
+  modules:{
+    robots: robotsModule,
+    users: usersModule
   },
-  actions:{
-    getParts({commit}) {
-      axios.get('/api/parts')
-        .then((result)=> commit('updateParts', result.data))
-        .catch(console.error);
-    },
-  },
-  getters: {
-    cartSaleItems(state) {
-      return state.cart.filter((item) => item.head.onSale);
+  getters:{
+    foo(state){
+      return `root-getter/${state.foo}`;
     }
   }
 });

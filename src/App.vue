@@ -1,4 +1,15 @@
 <template>
+<!--  <div>-->
+<!--    Root Foo: {{ rootFoo }} <br />-->
+<!--    Robots Foo: {{ robotsFoo }} <br />-->
+<!--    Users Foo: {{ usersFoo }} <br />-->
+
+<!--    <br />-->
+
+<!--    Root Getter Foo: {{ rootGetterFoo }} <br />-->
+<!--    Robots Getter Foo: {{ robotsGetterFoo }} <br />-->
+<!--  </div>-->
+
   <header>
     <nav>
       <ul>
@@ -36,11 +47,19 @@
 </template>
 
 <script>
+import {mapState, mapGetters} from "vuex";
 export default {
   name: 'App',
   computed:{
+    ...mapState({
+      rootFoo: 'foo',
+      usersFoo: state => state.users.foo,
+    }),
+    ...mapState('robots', { robotsFoo: 'foo' }),
+    ...mapGetters({rootGetterFoo: 'foo'}),
+    ...mapGetters('robots', {robotsGetterFoo: 'foo'}),
     cart(){
-      return this.$store.state.cart;
+      return this.$store.state.robots.cart;
     }
   }
 };

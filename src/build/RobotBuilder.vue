@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div v-if="availableParts" class="content">
     <div class="preview">
       <CollapsibleSection>
         <div class="preview-content">
@@ -51,23 +51,6 @@
       <PartSelector :parts="availableParts.bases" position="bottom"
                     @partSelected="part => selectedRobot.base = part"/>
     </div>
-    <div>
-      <h1>Cart</h1>
-      <table>
-        <thead>
-        <tr>
-          <th>Robot</th>
-          <th class="cost">Cost</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(robot, index) in cart" :key="index">
-          <td>{{ robot.head.title }}</td>
-          <td class="cost">{{ robot.cost }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
 
 
   </div>
@@ -75,13 +58,15 @@
 </template>
 
 <script>
-import availableParts from '../data/parts'
 import PartSelector from "@/build/PartSelector.vue";
 import CollapsibleSection from "@/shared/CollapsibleSection.vue";
 
 
 export default {
   name: 'RobotBuilder',
+  created() {
+    this.$store.dispatch('getParts')
+  },
   beforeRouteLeave(to, from, next){
     if (this.addedToCart) {
       next(true)
@@ -94,7 +79,6 @@ export default {
   components: {CollapsibleSection, PartSelector},
   data() {
     return {
-      availableParts,
       addedToCart: false,
       cart: [],
       selectedRobot: {
@@ -107,6 +91,9 @@ export default {
     }
   },
   computed: {
+    availableParts(){
+      return this.$store.state.parts;
+    },
     saleBorderClass() {
       return this.selectedRobot.head.onSale ? 'sale-border' : '';
     },
@@ -169,16 +156,6 @@ export default {
 
 .sale-border {
   border: 3px solid red;
-}
-
-td, th {
-  text-align: left;
-  padding: 5px;
-  padding-right: 20px;
-}
-
-.cost {
-  text-align: right;
 }
 
 .content {

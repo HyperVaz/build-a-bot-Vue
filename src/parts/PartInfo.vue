@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import partSelector from "@/build/PartSelector.vue";
-import parts from "@/data/parts";
+import getPartsMixin from "@/parts/get-parts-mixin";
 export default {
   name: 'PartInfo',
+  mixins:[getPartsMixin],
   props:{
     partType:{type: String},
     id: {type:[String, Number]},
@@ -22,7 +22,7 @@ export default {
   computed:{
     part(){
       const {partType, id} = this;
-      return parts[partType].find(part => part.id === +id);
+      return this.parts[partType].find(part => part.id === +id);
     }
   }
 };

@@ -15,7 +15,7 @@
         <router-link :to="{name: 'BrowseBases'}">Bases</router-link>
       </li>
     </ul>
-
+    <router-view/>
   </div>
 </template>
 

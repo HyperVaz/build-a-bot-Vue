@@ -13,17 +13,23 @@ import RobotArms from "@/parts/RobotArms.vue";
 import RobotTorsos from "@/parts/RobotTorsos.vue";
 import SidebarStandart from "@/sidebars/SidebarStandart.vue";
 import SidebarBuild from "@/sidebars/SidebarBuild.vue";
+import ShoppingCart from "@/cart/ShoppingCart.vue";
 
 export default createRouter({
   history: createWebHistory(),
-  routes: [{
+  routes: [
+    {
     path: '/',
     name: 'Home',
     components: {
       default: HomePage,
       sidebar: SidebarStandart
     },
-  }, {
+  },{
+      path: '/cart',
+      name: 'Cart',
+      component: ShoppingCart
+    },{
     path: '/build',
     name: 'Build',
     components: {

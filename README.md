@@ -1,24 +1,7 @@
-# build-a-bot
 
-## Project setup
-```
-npm install
-```
+# Build a bot from vue3 course
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+This is build-a-bot application for vue3 course from jmcooper vuejs-fundamentals course.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+For starting this bot you should clone this repo and start express.js server from build-a-bot server dist(for production version)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
